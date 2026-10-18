@@ -1,0 +1,35 @@
+{
+  "input_rows": 1208,
+  "missing_session_ids": 0,
+  "duplicate_sessions_removed": 8,
+  "label_aliases_normalized": 0,
+  "invalid_numeric_values": {
+    "Energy_kWh": 0,
+    "Duration_Mins": 0,
+    "Peak_Hour_Flag": 0,
+    "Ambient_Temp_C": 0
+  },
+  "unknown_charger_values": 0,
+  "missing_targets": 0,
+  "retained_rows": 1200,
+  "demo": true,
+  "source_sha256": "10205f5580e1aa030bec678c8ef4b2851ada1507c878f0b3779ff342168deafe",
+  "cleaned_sha256": "bda1ff77957df3cf6bc3975de8657ec73d9a316c498068b8b446bc91492778b8",
+  "imputation_values": {
+    "Energy_kWh": 58.74,
+    "Duration_Mins": 167.12,
+    "Peak_Hour_Flag": 0.0,
+    "Ambient_Temp_C": 32.75
+  },
+  "remaining_missing": {
+    "Session_ID": 0,
+    "Charger_Type": 0,
+    "Energy_kWh": 0,
+    "Duration_Mins": 0,
+    "Peak_Hour_Flag": 0,
+    "Ambient_Temp_C": 0,
+    "Grid_Status_Label": 0,
+    "Power_kW": 0,
+    "Energy_Efficiency_Group": 0
+  }
+}

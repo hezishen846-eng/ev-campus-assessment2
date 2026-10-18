@@ -1,0 +1,14 @@
+.venv/
+.idea/
+.env
+.env.*
+!.env.example
+__pycache__/
+.pytest_cache/
+.mplconfig/
+.cache/
+.DS_Store
+.streamlit/secrets.toml
+*.log
+# 正式原始数据是否可以公开，请先确认老师的数据共享规定。
+ev_campus_dataset.csv

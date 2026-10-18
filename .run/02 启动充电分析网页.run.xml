@@ -1,0 +1,12 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="02 启动充电分析网页" type="PythonConfigurationType" factoryName="Python">
+    <module name="ev_campus_assessment2" />
+    <option name="SDK_HOME" value="$PROJECT_DIR$/.venv/bin/python" />
+    <option name="IS_MODULE_SDK" value="false" />
+    <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+    <option name="SCRIPT_NAME" value="streamlit" />
+    <option name="PARAMETERS" value="run app.py --server.address 127.0.0.1" />
+    <option name="MODULE_MODE" value="true" />
+    <method v="2" />
+  </configuration>
+</component>
