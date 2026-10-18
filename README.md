@@ -8,7 +8,9 @@ Assessment 2（ITS72604）对应的 Python 项目。代码、关键设计说明�
 - 已配置独立 `.venv`，并提供三个 PyCharm 运行配置。
 - 当前没有收到老师的 `ev_campus_dataset.csv`。`demo/` 中是明确标记的**合成演示数据与模型**，不是正式实验结果。演示数据中的标签来自人为规则，模型高分不能作为真实预测能力的证据。
 - 正式的 `cleaned_ev_dataset.csv`、`ev_model.pkl` 和 `reports/` 会在提供真实 CSV 后生成在项目根目录。
-- GitHub / Streamlit Cloud 的实际发布、5 分钟视频的录制与上传尚未进行；准备步骤见 `docs/部署与演示.md`。
+- GitHub 公开仓库：[hezishen846-eng/ev-campus-assessment2](https://github.com/hezishen846-eng/ev-campus-assessment2)。
+- Streamlit Cloud 部署进行中，完成后在这里记录实际网址。演示视频由作者另行录制上传。
+- 公开版本默认使用合成演示数据；正式数据与正式实验结果仍待老师提供数据后验证。
 
 ## 在 PyCharm 中运行
 
