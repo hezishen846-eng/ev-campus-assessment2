@@ -9,7 +9,8 @@ Assessment 2（ITS72604）对应的 Python 项目。代码、关键设计说明�
 - 当前没有收到老师的 `ev_campus_dataset.csv`。`demo/` 中是明确标记的**合成演示数据与模型**，不是正式实验结果。演示数据中的标签来自人为规则，模型高分不能作为真实预测能力的证据。
 - 正式的 `cleaned_ev_dataset.csv`、`ev_model.pkl` 和 `reports/` 会在提供真实 CSV 后生成在项目根目录。
 - GitHub 公开仓库：[hezishen846-eng/ev-campus-assessment2](https://github.com/hezishen846-eng/ev-campus-assessment2)。
-- Streamlit Cloud 部署进行中，完成后在这里记录实际网址。演示视频由作者另行录制上传。
+- 在线网站：[EV Campus 充电运营分析](https://ev-campus-hezishen846.streamlit.app/)（Streamlit Community Cloud）。
+- 演示视频：由作者另行录制上传，完成后补充公开链接。
 - 公开版本默认使用合成演示数据；正式数据与正式实验结果仍待老师提供数据后验证。
 
 ## 在 PyCharm 中运行
@@ -58,7 +59,7 @@ python -m pytest -q
 | 任务 1：6 分 | `data_pipeline.py`、`ev_core.py` | 校验、缺失值处理、去重、功率、分组 CSV、清洗审计 |
 | 任务 2：9 分 | `train_model.py` | 80/20 分层划分、独热编码、随机森林/决策树/KNN 对比、四项指标、混淆矩阵、模型持久化 |
 | 任务 3：9 分 | `app.py` | KPI 仪表盘、交互图表、实时预测，侧边栏导航 |
-| 任务 4：6 分 | `.streamlit/`、`requirements.txt`、`docs/部署与演示.md` | 统一界面、依赖配置、部署步骤与视频提纲；实际发布及录制待完成 |
+| 任务 4：6 分 | `.streamlit/`、`requirements.txt`、`docs/部署与演示.md` | 统一界面、依赖配置、GitHub 与 Streamlit Cloud 已发布；视频待作者录制 |
 | 验证 | `tests/` | 数据异常、去重、无泄漏插补、模型重新加载、筛选和实时预测 |
 
 ## 数据处理约定
