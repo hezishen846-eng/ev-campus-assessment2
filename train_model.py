@@ -23,23 +23,21 @@ from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
 from sklearn.tree import DecisionTreeClassifier
 
-from ev_core import FEATURES, LABELS, NUMERIC, ROOT, TARGET, file_hash, normalize_data
+from ev_core import CATEGORICAL, FEATURES, LABELS, NUMERIC, ROOT, SCHEMA_VERSION, TARGET, file_hash, normalize_data
 
 
 def make_pipeline(estimator) -> Pipeline:
     # 插补器、标准化和独热编码都在 Pipeline 内拟合，因此每个交叉验证折相互隔离。
-    continuous = [x for x in NUMERIC if x != "Peak_Hour_Flag"]
     preprocessor = ColumnTransformer([
         ("numeric", Pipeline([("impute", SimpleImputer(strategy="median", keep_empty_features=True)),
-                              ("scale", StandardScaler())]), continuous),
-        ("flag", SimpleImputer(strategy="most_frequent", keep_empty_features=True), ["Peak_Hour_Flag"]),
-        ("charger", Pipeline([("impute", SimpleImputer(strategy="most_frequent")),
-                              ("encode", OneHotEncoder(handle_unknown="ignore", sparse_output=False))]), ["Charger_Type"]),
+                              ("scale", StandardScaler())]), NUMERIC),
+        ("categories", Pipeline([("impute", SimpleImputer(strategy="most_frequent")),
+                              ("encode", OneHotEncoder(handle_unknown="ignore", sparse_output=False))]), CATEGORICAL),
     ])
     return Pipeline([("prepare", preprocessor), ("classifier", estimator)])
 
 
-def train(source: Path, output: Path, demo: bool = False) -> dict:
+def train(source: Path, output: Path) -> dict:
     # 学习用输入来自原始 CSV，而非已经使用全数据中位数插补的 EDA 文件。
     df, audit = normalize_data(pd.read_csv(source))
     df = df.dropna(subset=[TARGET]).reset_index(drop=True)
@@ -88,7 +86,8 @@ def train(source: Path, output: Path, demo: bool = False) -> dict:
     best = str(comparison.iloc[0]["model"])
     comparison.to_csv(reports / "model_comparison.csv", index=False)
     (reports / "classification_reports.json").write_text(json.dumps(details, indent=2), encoding="utf-8")
-    metadata = {"demo": demo, "selected_model": best, "selection_rule": "training CV macro F1",
+    metadata = {"demo": False, "schema_version": SCHEMA_VERSION,
+                "source_file": source.name, "selected_model": best, "selection_rule": "training CV macro F1",
                 "train_rows": len(X_train), "test_rows": len(X_test), "cv_folds": folds, "random_state": 42,
                 "source_sha256": file_hash(source), "sklearn_version": sklearn.__version__,
                 "missing_targets_excluded": audit["missing_targets"], "features": FEATURES,

@@ -7,27 +7,28 @@ from pathlib import Path
 
 import pandas as pd
 
-from ev_core import ROOT, NUMERIC, engineer_features, file_hash, normalize_data
+from ev_core import CATEGORICAL, PEAK_RULE, ROOT, NUMERIC, SCHEMA_VERSION, engineer_features, file_hash, normalize_data
 
 
-def build_dataset(source: Path, output: Path, demo: bool = False) -> pd.DataFrame:
+def build_dataset(source: Path, output: Path) -> pd.DataFrame:
     frame, audit = normalize_data(pd.read_csv(source))
     medians = {}
     for col in NUMERIC:
-        # 二元标志不使用 0.5 这样的插补值，按类别众数填补。
         if frame[col].dropna().empty:
             raise ValueError(f"{col} 整列缺失或无效，无法从数据计算插补值。")
-        value = frame[col].mode().iloc[0] if col == "Peak_Hour_Flag" else frame[col].median()
+        value = frame[col].median()
         medians[col] = float(value)
         frame[col] = frame[col].fillna(value)
-    if frame.Charger_Type.dropna().empty:
-        raise ValueError("Charger_Type 没有有效值，无法进行类别插补。")
-    frame["Charger_Type"] = frame.Charger_Type.fillna(frame.Charger_Type.mode().iloc[0])
+    categorical_values = {}
+    for col in CATEGORICAL:
+        if frame[col].dropna().empty:
+            raise ValueError(f"{col} 没有有效值，无法进行类别插补。")
+        categorical_values[col] = frame[col].mode().iloc[0]
+        frame[col] = frame[col].fillna(categorical_values[col])
     # 保留作业额外提供的数值列，并用其中位数补齐；全空列保持空值并记入报告。
     extras = [c for c in frame.select_dtypes("number").columns if c not in NUMERIC]
     for col in extras:
         frame[col] = frame[col].fillna(frame[col].median())
-    frame["Peak_Hour_Flag"] = frame.Peak_Hour_Flag.astype(int)
     frame = engineer_features(frame)
     output.mkdir(parents=True, exist_ok=True)
     report_dir = output / "reports"
@@ -37,10 +38,11 @@ def build_dataset(source: Path, output: Path, demo: bool = False) -> pd.DataFram
     # 同时按充电桩种类和高峰标志聚合，便于比较不同组合。
     summary = frame.groupby(["Charger_Type", "Peak_Hour_Flag"], observed=True).agg(
         Session_Count=("Session_ID", "count"), Average_Energy_kWh=("Energy_kWh", "mean"),
-        Average_Temp_C=("Ambient_Temp_C", "mean"), Average_Power_kW=("Power_kW", "mean"),
+        Average_Battery_Temp_C=("Battery_Temp_C", "mean"), Average_Power_kW=("Power_kW", "mean"),
     ).reset_index()
     summary.to_csv(report_dir / "group_summary.csv", index=False)
-    audit.update({"demo": demo, "source_sha256": file_hash(source),
+    audit.update({"demo": False, "schema_version": SCHEMA_VERSION, "peak_hour_rule": PEAK_RULE,
+                  "source_sha256": file_hash(source), "categorical_imputation_values": categorical_values,
                   "cleaned_sha256": file_hash(destination), "imputation_values": medians,
                   "remaining_missing": {k: int(v) for k, v in frame.isna().sum().items()}})
     (report_dir / "data_quality.json").write_text(json.dumps(audit, ensure_ascii=False, indent=2), encoding="utf-8")

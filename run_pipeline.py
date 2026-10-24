@@ -7,10 +7,10 @@ from ev_core import ROOT
 from train_model import train
 
 
-def run(source: Path, output: Path, demo: bool = False):
-    build_dataset(source, output, demo=demo)
-    metadata = train(source, output, demo=demo)
-    print(f"{'演示' if demo else '正式'}流程完成，模型：{metadata['selected_model']}，输出：{output}")
+def run(source: Path, output: Path):
+    build_dataset(source, output)
+    metadata = train(source, output)
+    print(f"正式流程完成，模型：{metadata['selected_model']}，输出：{output}")
     return metadata
 
 

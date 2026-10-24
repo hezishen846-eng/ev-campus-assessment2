@@ -1,0 +1,54 @@
+{
+  "input_rows": 1200,
+  "missing_session_ids": 0,
+  "duplicate_sessions_removed": 0,
+  "missing_before_imputation": {
+    "Charger_Type": 0,
+    "User_Type": 0,
+    "Start_Hour": 0,
+    "Energy_kWh": 35,
+    "Duration_Mins": 25,
+    "Overstay_Mins": 0,
+    "Battery_Temp_C": 0
+  },
+  "label_aliases_normalized": 0,
+  "invalid_numeric_values": {
+    "Start_Hour": 0,
+    "Energy_kWh": 0,
+    "Duration_Mins": 0,
+    "Overstay_Mins": 0,
+    "Battery_Temp_C": 0
+  },
+  "missing_targets": 0,
+  "retained_rows": 1200,
+  "demo": false,
+  "schema_version": "campus_sessions_v2",
+  "peak_hour_rule": "12 <= Start_Hour < 17（按开始小时；原作业的 12:00–17:00）",
+  "source_sha256": "5583642c1f09218a002fa17e85ab02f119c60689914a401d63ace13c4099a1df",
+  "categorical_imputation_values": {
+    "Charger_Type": "AC",
+    "User_Type": "Student"
+  },
+  "cleaned_sha256": "efad70a119427d51fdc44423fed1c3898b0844460fe86c540a263dd5eac3859d",
+  "imputation_values": {
+    "Start_Hour": 11.0,
+    "Energy_kWh": 13.28,
+    "Duration_Mins": 97.0,
+    "Overstay_Mins": 0.0,
+    "Battery_Temp_C": 34.4
+  },
+  "remaining_missing": {
+    "Session_ID": 0,
+    "Charger_Type": 0,
+    "User_Type": 0,
+    "Start_Hour": 0,
+    "Duration_Mins": 0,
+    "Energy_kWh": 0,
+    "Overstay_Mins": 0,
+    "Battery_Temp_C": 0,
+    "Grid_Status_Label": 0,
+    "Peak_Hour_Flag": 0,
+    "Power_kW": 0,
+    "Energy_Efficiency_Group": 0
+  }
+}

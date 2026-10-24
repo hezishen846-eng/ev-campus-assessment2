@@ -1,0 +1,101 @@
+{
+  "RandomForest": {
+    "Normal": {
+      "precision": 0.9788732394366197,
+      "recall": 0.7722222222222223,
+      "f1-score": 0.8633540372670807,
+      "support": 180.0
+    },
+    "Overheated": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 26.0
+    },
+    "Grid_Surge": {
+      "precision": 0.4305555555555556,
+      "recall": 0.9117647058823529,
+      "f1-score": 0.5849056603773585,
+      "support": 34.0
+    },
+    "accuracy": 0.8166666666666667,
+    "macro avg": {
+      "precision": 0.8031429316640585,
+      "recall": 0.8946623093681917,
+      "f1-score": 0.8160865658814798,
+      "support": 240.0
+    },
+    "weighted avg": {
+      "precision": 0.9034836332811685,
+      "recall": 0.8166666666666667,
+      "f1-score": 0.8387104965037696,
+      "support": 240.0
+    }
+  },
+  "DecisionTree": {
+    "Normal": {
+      "precision": 0.9855072463768116,
+      "recall": 0.7555555555555555,
+      "f1-score": 0.8553459119496856,
+      "support": 180.0
+    },
+    "Overheated": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 26.0
+    },
+    "Grid_Surge": {
+      "precision": 0.42105263157894735,
+      "recall": 0.9411764705882353,
+      "f1-score": 0.5818181818181818,
+      "support": 34.0
+    },
+    "accuracy": 0.8083333333333333,
+    "macro avg": {
+      "precision": 0.8021866259852529,
+      "recall": 0.8989106753812637,
+      "f1-score": 0.8123880312559558,
+      "support": 240.0
+    },
+    "weighted avg": {
+      "precision": 0.9071128909229597,
+      "recall": 0.8083333333333333,
+      "f1-score": 0.83226700971984,
+      "support": 240.0
+    }
+  },
+  "KNN": {
+    "Normal": {
+      "precision": 0.8465608465608465,
+      "recall": 0.8888888888888888,
+      "f1-score": 0.8672086720867209,
+      "support": 180.0
+    },
+    "Overheated": {
+      "precision": 0.9444444444444444,
+      "recall": 0.6538461538461539,
+      "f1-score": 0.7727272727272727,
+      "support": 26.0
+    },
+    "Grid_Surge": {
+      "precision": 0.36363636363636365,
+      "recall": 0.35294117647058826,
+      "f1-score": 0.3582089552238806,
+      "support": 34.0
+    },
+    "accuracy": 0.7875,
+    "macro avg": {
+      "precision": 0.7182138848805515,
+      "recall": 0.6318920730685437,
+      "f1-score": 0.6660483000126247,
+      "support": 240.0
+    },
+    "weighted avg": {
+      "precision": 0.7887506012506013,
+      "recall": 0.7875,
+      "f1-score": 0.7848648939338783,
+      "support": 240.0
+    }
+  }
+}
